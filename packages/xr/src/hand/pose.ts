@@ -79,9 +79,6 @@ export function updateXRHandPoseState(
   state.name = closestPoseName*/
 }
 
-const invertedWirstHelper = new Matrix4()
-const matrixHelper = new Matrix4()
-
 function updateXRHandPoseData(
   frame: XRFrame,
   referenceSpace: XRSpace,
@@ -92,18 +89,6 @@ function updateXRHandPoseData(
 
   if (!validPose) {
     return false
-  }
-
-  //calculate bone poses in relation to the wrist
-
-  // The first item in hand pose information is the wrist
-  invertedWirstHelper.fromArray(handPoseData, 0)
-  invertedWirstHelper.invert()
-
-  for (let i = 0; i < handPoseData.length; i += 16) {
-    matrixHelper.fromArray(handPoseData, i)
-    matrixHelper.premultiply(invertedWirstHelper)
-    matrixHelper.toArray(handPoseData, i)
   }
 
   return true
