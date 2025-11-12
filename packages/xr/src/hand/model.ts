@@ -37,7 +37,7 @@ export function cloneXRHandGltf({ scene }: GLTF) {
   if (mesh == null) {
     throw new Error(`missing SkinnedMesh in loaded XRHand model`)
   }
-  mesh.frustumCulled = false
+  mesh.frustumCulled = true
   return result
 }
 
